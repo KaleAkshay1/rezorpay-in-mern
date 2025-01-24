@@ -23,12 +23,12 @@ function App() {
         amount: result.data.data.amount,
         currency: result.data.data.currency,
         order_id: result.data.data.id,
-        handler: function (response) {
-          // give api call here to varify payment
-          console.log(response);
-          alert(
-            "Payment successful! Payment ID: " + response.razorpay_payment_id
+        handler: async function (response) {
+          const result = await axios.post(
+            "http://localhost:3000/verify-payment",
+            response
           );
+          console.log("result is ", result);
         },
         prefill: {
           name: "adi",
